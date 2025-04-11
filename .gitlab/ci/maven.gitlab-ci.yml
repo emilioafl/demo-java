@@ -1,0 +1,15 @@
+stages:
+  - Build
+  - Code Quality
+  - Images
+  - Vulnerability Scanning
+  - Deploy
+
+include:
+  - local: .gitlab/ci/templates/build.gitlab-ci.yml
+  - local: .gitlab/ci/templates/unit-tests.gitlab-ci.yml
+  - local: .gitlab/ci/templates/sonarqube.gitlab-ci.yml
+  - local: .gitlab/ci/templates/coverage.gitlab-ci.yml
+  - local: .gitlab/ci/templates/create-image.gitlab-ci.yml
+  - local: .gitlab/ci/templates/grype.gitlab-ci.yml
+  - local: .gitlab/ci/templates/deploy-k8s.gitlab-ci.yml
