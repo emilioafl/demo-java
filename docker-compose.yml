@@ -1,0 +1,14 @@
+services:
+  demo-java:
+    image: registry.gitlab.com/demo6324515/demo-java:main
+    container_name: demo-java
+    ports:
+      - "8000:8000"
+    mem_limit: 256m
+    cpus: 0.3
+    restart: always
+    networks:
+      - demo-net
+
+networks:
+  demo-net:

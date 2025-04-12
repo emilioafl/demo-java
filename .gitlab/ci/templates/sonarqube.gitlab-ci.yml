@@ -1,0 +1,6 @@
+include:
+  - local: .gitlab/ci/templates/base.gitlab-ci.yml
+    inputs:
+      job-name: sonarqube
+      job-identifier: sonarqube
+      job-stage: Code Quality

@@ -1,0 +1,11 @@
+include:
+  - local: .gitlab/ci/templates/base.gitlab-ci.yml
+    inputs:
+      job-name: deploy-k8s
+      job-identifier: kubernetes
+      job-stage: Deploy
+
+deploy-k8s:
+  when: manual
+  allow_failure: false
+  dependencies: []

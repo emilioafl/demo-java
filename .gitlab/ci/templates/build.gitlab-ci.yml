@@ -1,0 +1,9 @@
+include:
+  - local: .gitlab/ci/templates/base.gitlab-ci.yml
+    inputs:
+      job-name: build
+      job-identifier: build
+      job-stage: Build
+      artifacts_paths:
+        - target/*.jar
+        - target/classes

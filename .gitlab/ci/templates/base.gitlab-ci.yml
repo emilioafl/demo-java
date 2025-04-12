@@ -1,0 +1,31 @@
+spec:
+  inputs:
+    job-name:
+      type: string
+      default: base-job
+    job-identifier:
+      type: string
+      default: base-job
+    job-image:
+      type: string
+      default: emilioflc/pipeline:1.0.0
+    job-stage:
+      type: string
+      default: test
+    artifacts_paths:
+      type: array
+      default: []
+---
+$[[ inputs.job-name ]]:
+  stage: $[[ inputs.job-stage ]]
+  image: $[[ inputs.job-image ]]
+  variables:
+    JOB_IDENTIFIER: $[[ inputs.job-identifier ]]
+  script:
+    - (cd /app && python -m pipeline)
+  tags:
+    - pipeline-linux-amd64
+  artifacts:
+    paths: $[[ inputs.artifacts_paths ]]
+    when: always
+    expire_in: 3 months

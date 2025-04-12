@@ -1,0 +1,18 @@
+include:
+  - local: .gitlab/ci/templates/base.gitlab-ci.yml
+    inputs:
+      job-name: unit-tests
+      job-identifier: unit-tests
+      job-stage: Code Quality
+
+unit-tests:
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+    paths:
+      - target/surefire-reports
+      - target/site/jacoco/jacoco.xml
+      - target/site/jacoco/index.html
+    access: none

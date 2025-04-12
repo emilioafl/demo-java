@@ -1,0 +1,8 @@
+include:
+  - local: .gitlab/ci/templates/base.gitlab-ci.yml
+    inputs:
+      job-name: grype
+      job-identifier: grype
+      job-stage: Vulnerability Scanning
+      artifacts_paths:
+        - $CI_PROJECT_DIR/docker-image-scan-result.html

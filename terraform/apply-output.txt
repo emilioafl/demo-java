@@ -5,8 +5,8 @@ Terraform used the selected providers to generate the following execution plan. 
 
 Terraform will perform the following actions:
 
-  # aws_instance.k3s_node will be created
-  + resource "aws_instance" "k3s_node" {
+  # aws_instance.docker_node will be created
+  + resource "aws_instance" "docker_node" {
       + ami                                  = "ami-084568db4383264d4"
       + arn                                  = (known after apply)
       + associate_public_ip_address          = (known after apply)
@@ -45,13 +45,13 @@ Terraform will perform the following actions:
       + spot_instance_request_id             = (known after apply)
       + subnet_id                            = (known after apply)
       + tags                                 = {
-          + "Name" = "k3s-single-node"
+          + "Name" = "docker-single-node"
         }
       + tags_all                             = {
-          + "Name" = "k3s-single-node"
+          + "Name" = "docker-single-node"
         }
       + tenancy                              = (known after apply)
-      + user_data                            = "cb40361fbdf449931e01b65149806208cba56056"
+      + user_data                            = "dc40ca4990a97ff17336a734932d07bd95445e7e"
       + user_data_base64                     = (known after apply)
       + user_data_replace_on_change          = false
       + vpc_security_group_ids               = (known after apply)
@@ -92,10 +92,10 @@ Terraform will perform the following actions:
       + tags_all        = (known after apply)
     }
 
-  # aws_security_group.k3s_sg will be created
-  + resource "aws_security_group" "k3s_sg" {
+  # aws_security_group.docker_sg will be created
+  + resource "aws_security_group" "docker_sg" {
       + arn                    = (known after apply)
-      + description            = "Allow SSH and Kubernetes ports"
+      + description            = "Allow SSH and Docker-related ports"
       + egress                 = [
           + {
               + cidr_blocks      = [
@@ -130,17 +130,17 @@ Terraform will perform the following actions:
               + cidr_blocks      = [
                   + "0.0.0.0/0",
                 ]
-              + from_port        = 6443
+              + from_port        = 80
               + ipv6_cidr_blocks = []
               + prefix_list_ids  = []
               + protocol         = "tcp"
               + security_groups  = []
               + self             = false
-              + to_port          = 6443
+              + to_port          = 80
                 # (1 unchanged attribute hidden)
             },
         ]
-      + name                   = "k3s_sg"
+      + name                   = "docker_sg"
       + name_prefix            = (known after apply)
       + owner_id               = (known after apply)
       + revoke_rules_on_delete = false
@@ -150,6 +150,10 @@ Terraform will perform the following actions:
 
 Plan: 3 to add, 0 to change, 0 to destroy.
 
+Changes to Outputs:
+  + docker_public_ip = (known after apply)
+  + ssh_connection   = (known after apply)
+
 Do you want to perform these actions?
   Terraform will perform the actions described above.
   Only 'yes' will be accepted to approve.
@@ -157,11 +161,16 @@ Do you want to perform these actions?
   Enter a value: yes
 
 aws_key_pair.deployer: Creating...
-aws_security_group.k3s_sg: Creating...
+aws_security_group.docker_sg: Creating...
 aws_key_pair.deployer: Creation complete after 1s [id=deployer-key]
-aws_security_group.k3s_sg: Creation complete after 4s [id=sg-0489564dad9cbe175]
-aws_instance.k3s_node: Creating...
-aws_instance.k3s_node: Still creating... [10s elapsed]
-aws_instance.k3s_node: Creation complete after 13s [id=i-0d24d472d355d0802]
+aws_security_group.docker_sg: Creation complete after 4s [id=sg-071415b2b17ce5e9b]
+aws_instance.docker_node: Creating...
+aws_instance.docker_node: Still creating... [10s elapsed]
+aws_instance.docker_node: Creation complete after 14s [id=i-09ed64841c502b370]
 
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+docker_public_ip = "54.159.176.181"
+ssh_connection = "ssh -i ~/.ssh/id_rsa ubuntu@54.159.176.181"

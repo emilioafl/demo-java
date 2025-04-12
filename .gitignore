@@ -37,3 +37,5 @@ build/
 # Terraform
 .terraform
 terraform.tfstate
+terraform.tfstate.backup
+oci_api_key.pem

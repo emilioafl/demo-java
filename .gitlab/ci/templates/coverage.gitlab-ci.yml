@@ -1,0 +1,12 @@
+include:
+  - local: .gitlab/ci/templates/base.gitlab-ci.yml
+    inputs:
+      job-name: code-coverage
+      job-identifier: code-coverage
+      job-stage: Code Quality
+      artifacts_paths:
+        - $CI_PROJECT_DIR/target/site/jacoco/index.html
+
+code-coverage:
+  needs:
+    - unit-tests

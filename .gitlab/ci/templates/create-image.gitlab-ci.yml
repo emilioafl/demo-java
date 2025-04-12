@@ -1,0 +1,10 @@
+include:
+  - local: .gitlab/ci/templates/base.gitlab-ci.yml
+    inputs:
+      job-name: create-image
+      job-identifier: create-image
+      job-stage: Images
+
+create-image:
+  when: manual
+  allow_failure: false
